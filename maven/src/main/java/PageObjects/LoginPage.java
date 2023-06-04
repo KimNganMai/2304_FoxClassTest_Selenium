@@ -27,6 +27,14 @@ public class LoginPage {
     @FindBy(xpath = "//button[@id='btn-login']")
     public WebElement btnLogin;
 
-    @FindBy(xpath = "//div[@class='toast-message']")
+//    @FindBy(xpath = "//div[@class='toast-message']")
+//    public WebElement msgToastMsg;
+
+    String xpath = "//div[@class='toast-message']";
+    @FindBy(xpath = "")
     public WebElement msgToastMsg;
+
+    public void setMsgToastMsg(WebElement msgToastMsg) {
+        this.msgToastMsg = msgToastMsg;
+    }
 }
