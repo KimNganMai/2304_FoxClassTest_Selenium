@@ -13,7 +13,7 @@ Feature: As a user, I want to login to "http://xthb.huce.edu.vn/"
     | kngan     |           | Vui lòng nhập vào mật khẩu  |
     |           | abc       | Vui lòng nhập vào tài khoản |
 
-  Scenario: LI_01 Check cannot login without password
+  Scenario: LI_02 Check cannot login without password - example for data table
     Given The login page is shown
     When User attempt to login with data
       | User name | Pass word |
