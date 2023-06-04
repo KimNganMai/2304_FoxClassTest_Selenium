@@ -1,13 +1,11 @@
 package StepDefinitions;
+import CommonFuncs.DataTableSection;
 import PageObjects.LoginPage;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.util.List;
-import java.util.Map;
 
 public class LoginDef {
     WebDriver driver;
@@ -31,7 +29,8 @@ public class LoginDef {
 
     @Then("The message {string} is shown")
     public void theMessageIsShown(String expMsg) {
-        String actMsg = this.loginPage.msgToastMsg.getText();
+        String actMsg = this.loginPage.msgToastMsg.getText().toString();
+        this.loginPage.msgToastMsg.isDisplayed();
         Assertions.assertEquals(expMsg, actMsg);
     }
 
@@ -41,9 +40,13 @@ public class LoginDef {
     }
 
     @When("User attempt to login with data")
-    public void userAttemptToLoginWithData(DataTable datatable) {
-        for (Map<String, String> row : datatable.asMaps(String.class, String.class)) {
-            System.out.println(row.get("User name"));
-        }
+    public void userAttemptToLoginWithData(DataTable dataTable) {
+        // Get data table value
+        String username = DataTableSection.getDataRowByKey(dataTable, "User name");
+        String password = DataTableSection.getDataRowByKey(dataTable, "Pass word");
+        // Action test
+        this.loginPage.txtAccount.sendKeys(username);
+        this.loginPage.txtPwd.sendKeys(password);
+        this.loginPage.btnLogin.click();
     }
 }
