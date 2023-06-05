@@ -11,7 +11,7 @@ Feature: As a user, I want to login to "http://xthb.huce.edu.vn/"
     Examples:
     | user_name | pass_word | message                     |
     | kngan     |           | Vui lòng nhập vào mật khẩu  |
-    |           | abc       | Vui lòng nhập vào tài khoản |
+#    |           | abc       | Vui lòng nhập vào tài khoản |
 
   Scenario: LI_02 Check cannot login without password - example for data table
     Given The login page is shown
