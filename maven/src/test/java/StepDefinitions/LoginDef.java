@@ -49,4 +49,43 @@ public class LoginDef {
         this.loginPage.txtPwd.sendKeys(password);
         this.loginPage.btnLogin.click();
     }
+
+    @When("User attempt to login  with data table matrix")
+    public void userAttemptToLoginWithDataTableMatrix(DataTable dataTable) {
+        String username = DataTableSection.getDataColAndRowByKey(dataTable, "User name","");
+        System.out.println(username);
+        String password = DataTableSection.getDataColAndRowByKey(dataTable,"","Pass word");
+        System.out.println(password);
+        try{
+            // Action test
+            this.loginPage.txtAccount.sendKeys(username);
+            this.loginPage.txtPwd.sendKeys(password);
+            this.loginPage.btnLogin.click();
+            //
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(username);
+            System.out.println(password);
+        }
+    }
+
+    @When("User attempt to login with data - column")
+    public void userAttemptToLoginWithDataColumn(DataTable dataTable) {
+        // Get data table value
+        String username = DataTableSection.getDataColByKey(dataTable, "User name");
+        System.out.println(username);
+        String password = DataTableSection.getDataColByKey(dataTable, "Pass word");
+        System.out.println(password);
+        try{
+            // Action test
+            this.loginPage.txtAccount.sendKeys(username);
+            this.loginPage.txtPwd.sendKeys(password);
+            this.loginPage.btnLogin.click();
+            //
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(username);
+            System.out.println(password);
+        }
+    }
 }

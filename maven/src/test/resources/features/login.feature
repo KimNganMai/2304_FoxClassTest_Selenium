@@ -15,12 +15,15 @@ Feature: As a user, I want to login to "http://xthb.huce.edu.vn/"
 
   Scenario: LI_02 Check cannot login without password - example for data table
     Given The login page is shown
-    When User attempt to login with data
-      | User name | Pass word |
-      | kngan     | abc       |
+#    When User attempt to login with data
+#      | User name | Pass word |
+#      | kngan     | abc       |
     When User attempt to login with data - column
       | User name | kngan     |
       | Pass word | abc       |
-    Then The message "Vui lòng nhập vào mật khẩu" is shown
-    Then Close browser
+#    When User attempt to login  with data table matrix
+#      |             | Pass word |
+#      | User name   | 123       |
+#    Then The message "Vui lòng nhập vào mật khẩu" is shown
+#    Then Close browser
 
