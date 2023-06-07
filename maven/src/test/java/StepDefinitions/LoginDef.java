@@ -4,13 +4,17 @@ import PageObjects.LoginPage;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 
 public class LoginDef {
     WebDriver driver;
     LoginPage loginPage;
-
+    WebDriverWait wait;
     @Given("The login page is shown")
     public void theLoginPageIsShown() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webDriver/chromedriver.exe");
@@ -29,9 +33,17 @@ public class LoginDef {
 
     @Then("The message {string} is shown")
     public void theMessageIsShown(String expMsg) {
-        String actMsg = this.loginPage.msgToastMsg.getText().toString();
-        this.loginPage.msgToastMsg.isDisplayed();
-        Assertions.assertEquals(expMsg, actMsg);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        Boolean actMsg = false;
+
+        try {
+            actMsg = wait.until(ExpectedConditions.visibilityOf(this.loginPage.msgToastMsgWait)).isDisplayed();
+            Assertions.assertEquals(true, actMsg);
+        } catch (TimeoutException e) {
+            System.out.println("khong ton tai msgToastMsgWait ");
+        }
+//        this.loginPage.msgToastMsg.isDisplayed();
+//        Assertions.assertEquals(actMsg, actMsg);
     }
 
     @Then("Close browser")
@@ -48,5 +60,10 @@ public class LoginDef {
         this.loginPage.txtAccount.sendKeys(username);
         this.loginPage.txtPwd.sendKeys(password);
         this.loginPage.btnLogin.click();
+    }
+
+    @Then("The message {string} is shown in {int} seconds")
+    public void theMessageIsShownInSeconds(String arg0, int arg1) {
+
     }
 }

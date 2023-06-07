@@ -1,9 +1,14 @@
 package PageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPage {
     WebDriver driver;
@@ -27,12 +32,11 @@ public class LoginPage {
     @FindBy(xpath = "//button[@id='btn-login']")
     public WebElement btnLogin;
 
-//    @FindBy(xpath = "//div[@class='toast-message']")
-//    public WebElement msgToastMsg;
-
-    String xpath = "//div[@class='toast-message']";
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//div[@class='toast-message']")
     public WebElement msgToastMsg;
+    @FindBy(xpath = "//div[@class='toast-message' and text()= 'Vui lòng  n123123hập vào mật khẩu']")
+    public WebElement msgToastMsgWait;
+
 
     public void setMsgToastMsg(WebElement msgToastMsg) {
         this.msgToastMsg = msgToastMsg;
